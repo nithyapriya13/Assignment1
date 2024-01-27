@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>ToDo List</title>
+  <style>
+    .strike:checked+label
+    {
+        text-decoration: line-through ;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">To-Do List</h2>
+
+    <ul class="list-group" id="todoList">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="form-check">
+          <input class="form-check-input strike" type="checkbox" id="task1">
+          <label class="form-check-label strike" for="task1">Checkbox Task</label>
+        </div>
+        <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="form-check">
+          <input class="form-check-input strike" type="checkbox" id="task2">
+          <label class="form-check-label strike" for="task2">Assignment</label>
+        </div>
+        <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+      </li>
+    </ul>
+    <div class="input-group mt-3">
+      <input type="text" class="form-control" placeholder="Type in your New Task" id="newTaskInput">
+      <button class="btn btn-primary" id="addTaskBtn">Add Task</button>
+    </div>
+
+  </div>
+ 
+<h2 class="text-center mb-4">Terminated</h2>
+<ul class="list-group" id="removed"></ul>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('addTaskBtn').addEventListener('click', function() {
+      var taskInput = document.getElementById('newTaskInput').value;
+      var currentDateAndTime=new Date();
+      var formattedDateAndTime = currentDateAndTime.toLocaleString();
+      if (taskInput.trim() !== '') {
+        var todoList = document.getElementById('todoList');
+        var newTask = document.createElement('li');
+        newTask.className = 'list-group-item d-flex justify-content-between align-items-center';
+        newTask.innerHTML = `
+          <div class="form-check">
+            <input class="form-check-input strike" type="checkbox">
+            <label class="form-check-label strike">${taskInput}&ensp;${formattedDateAndTime}</label>
+          </div>
+          <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+        `;
+        todoList.appendChild(newTask);
+        document.getElementById('newTaskInput').value = '';
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('delete-btn')) {
+       var taskItem = e.target.parentElement;
+       //Remove Element
+
+       if(taskItem.parentElement.id === 'todoList')
+       {
+        removed.appendChild(taskItem);
+        changeButtonName(taskItem.querySelector('.delete-btn'),'Remove Parmantly');
+       }
+       else if(taskItem.parentElement.id === 'removed')
+       {
+        taskItem.remove();
+       }
+      }
+    });
+    function changeButtonName(buttonElement, newName)
+    {
+        buttonElement.textContent= newName;
+    }
+  </script>
+</body>
+</html>
