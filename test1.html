@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <title>ToDo List</title>
   <style>
-    .script:checked+label
+    .strike:checked+label
     {
         text-decoration: line-through ;
     }
@@ -20,8 +20,8 @@
     <ul class="list-group" id="todoList">
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="form-check">
-          <input class="form-check-input script" type="checkbox" id="task1">
-          <label class="form-check-label script" for="task1">Checkbox Task</label>
+          <input class="form-check-input strike" type="checkbox" id="task1">
+          <label class="form-check-label strike" for="task1">Checkbox Task</label>
         </div>
         <button class="btn btn-danger btn-sm delete-btn">Remove</button>
       </li>
